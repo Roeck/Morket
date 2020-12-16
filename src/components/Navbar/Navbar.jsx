@@ -11,31 +11,36 @@ import {
 import { ShoppingCart } from '@material-ui/icons';
 
 import logo from '../../assets/logo.png';
-// import useStyles from './styles';
+import useStyles from './styles';
 
 const Navbar = () => {
-    const classes=useStyles();
+  const classes = useStyles();
 
-    return (
-        <>
-            <AppBar position='fixed' className={classes.AppBar} color="inherit">
-                <Toolbar>
-                    <Typography variant="h6" className={class.title} color="inherit">
-                        <img src={logo} alt="Morket" height="25px" className={classes.image} />
-                            Morket
-                    </Typography>
-                    <div className={classes.grow} />
-                    <div className={classes.button}>
-                        <IconButton aria-label="Show Cart Items" color="inherit">
-                            <Badge badgeContent={2} color="secondary">
-                                <ShoppingCart />
-                            </Badge>
-                        </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </>
-    )
+  return (
+    <>
+      <AppBar position='fixed' className={classes.AppBar} color='inherit'>
+        <Toolbar>
+          <Typography variant='h6' className={classes.title} color='inherit'>
+            <img
+              src={logo}
+              alt='Morket'
+              height='25px'
+              className={classes.image}
+            />
+            MORKET
+          </Typography>
+          <div className={classes.grow} />
+          <div className={classes.button}>
+            <IconButton aria-label='Show Cart Items' color='inherit'>
+              <Badge badgeContent={2} color='secondary'>
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
 };
 
 export default Navbar;
