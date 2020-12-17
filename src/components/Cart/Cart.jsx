@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import CartItem from './CartItem/CartItem';
 import useStyles from './styles';
 
-const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
+const Cart = ({
+  cart,
+  handleUpdateCartQty,
+  handleRemoveFromCart,
+  handleEmptyCart
+}) => {
   const classes = useStyles();
 
-  const handleEmptyCart = () => onEmptyCart();
-
-  const renderEmptyCart = () => (
+  const EmptyCart = () => (
     <Typography variant='subtitle1'>
       You have no items in your shopping cart,
       <Link className={classes.link} to='/'>
@@ -29,8 +32,8 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
           <Grid item xs={12} sm={4} key={lineItem.id}>
             <CartItem
               item={lineItem}
-              onUpdateCartQty={onUpdateCartQty}
-              onRemoveFromCart={onRemoveFromCart}
+              onUpdateCartQty={handleUpdateCartQty}
+              onRemoveFromCart={handleRemoveFromCart}
             />
           </Grid>
         ))}
@@ -71,7 +74,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
       <Typography className={classes.title} variant='h3' gutterBottom>
         Your Shopping Cart
       </Typography>
-      {!cart.line_items.length ? renderEmptyCart() : renderCart()}
+      {!cart.line_items.length ? handleEmptyCart() : renderCart()}
     </Container>
   );
 };
