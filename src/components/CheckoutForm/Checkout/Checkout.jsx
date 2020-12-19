@@ -11,12 +11,18 @@ import {
 } from '@material-ui/core';
 
 import useStyles from './styles';
+import AddressForm from '../AddressForm';
+import PaymentFormForm from '../PaymentFormForm';
 
 const steps = ['Shipping Adress', 'Payment Details'];
 
 export const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const classes = useStyles();
+
+  const Confirmation = () => <div>Confirmation</div>;
+
+  const Form = () => (activeStep === 0 ? <AddressForm /> : <PaymentForm />);
 
   return (
     <>
