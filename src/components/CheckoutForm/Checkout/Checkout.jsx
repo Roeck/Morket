@@ -12,7 +12,7 @@ import {
 
 import useStyles from './styles';
 import AddressForm from '../AddressForm';
-import PaymentFormForm from '../PaymentFormForm';
+import PaymentFormForm from '../PaymentForm';
 
 const steps = ['Shipping Adress', 'Payment Details'];
 
