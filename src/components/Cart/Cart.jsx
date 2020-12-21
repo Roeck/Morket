@@ -5,21 +5,18 @@ import { Link } from 'react-router-dom';
 import CartItem from './CartItem/CartItem';
 import useStyles from './styles';
 
-const Cart = ({
-  cart,
-  handleUpdateCartQty,
-  handleRemoveFromCart,
-  handleEmptyCart
-}) => {
+const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const classes = useStyles();
 
-  const EmptyCart = () => (
+  const handleEmptyCart = () => onEmptyCart();
+
+  const renderEmptyCart = () => (
     <Typography variant='subtitle1'>
-      You have no items in your shopping cart,
+      You have no items in your shopping cart.
       <Link className={classes.link} to='/'>
-        start adding some
+        {' '}
+        Start adding!
       </Link>
-      !
     </Typography>
   );
 
@@ -32,8 +29,8 @@ const Cart = ({
           <Grid item xs={12} sm={4} key={lineItem.id}>
             <CartItem
               item={lineItem}
-              onUpdateCartQty={handleUpdateCartQty}
-              onRemoveFromCart={handleRemoveFromCart}
+              onUpdateCartQty={onUpdateCartQty}
+              onRemoveFromCart={onRemoveFromCart}
             />
           </Grid>
         ))}
@@ -54,8 +51,6 @@ const Cart = ({
             Empty cart
           </Button>
           <Button
-            component={Link}
-            to='/checkout'
             className={classes.checkoutButton}
             component={Link}
             to='/checkout'
@@ -76,7 +71,7 @@ const Cart = ({
       <Typography className={classes.title} variant='h3' gutterBottom>
         Your Shopping Cart
       </Typography>
-      {!cart.line_items.length ? handleEmptyCart() : renderCart()}
+      {!cart.line_items.length ? renderEmptyCart() : renderCart()}
     </Container>
   );
 };

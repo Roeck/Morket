@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -14,13 +14,46 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import useStyles from './styles';
 
-const Navbar = ({ totalItems }) => {
+const PrimarySearchAppBar = ({ totalItems }) => {
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const classes = useStyles();
   const location = useLocation();
 
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton
+          component={Link}
+          to='/cart'
+          aria-label='Show cart items'
+          color='inherit'
+        >
+          <Badge badgeContent={totalItems} color='secondary'>
+            <ShoppingCart />
+          </Badge>
+        </IconButton>
+        <p>Cart</p>
+      </MenuItem>
+    </Menu>
+  );
+
   return (
     <>
-      <AppBar position='fixed' className={classes.AppBar} color='inherit'>
+      <AppBar position='fixed' className={classes.appBar} color='inherit'>
         <Toolbar>
           <Typography
             component={Link}
@@ -31,11 +64,11 @@ const Navbar = ({ totalItems }) => {
           >
             <img
               src={logo}
-              alt='Morket'
+              alt='commerce.js'
               height='25px'
               className={classes.image}
-            />
-            MORKET
+            />{' '}
+            Commerce.js
           </Typography>
           <div className={classes.grow} />
           {location.pathname === '/' && (
@@ -43,7 +76,7 @@ const Navbar = ({ totalItems }) => {
               <IconButton
                 component={Link}
                 to='/cart'
-                aria-label='Show Cart Items'
+                aria-label='Show cart items'
                 color='inherit'
               >
                 <Badge badgeContent={totalItems} color='secondary'>
@@ -54,8 +87,8 @@ const Navbar = ({ totalItems }) => {
           )}
         </Toolbar>
       </AppBar>
+      {renderMobileMenu}
     </>
   );
 };
-
-export default Navbar;
+export default PrimarySearchAppBar;
